@@ -25,17 +25,20 @@ const MEMBERS: Member[] = [
     <h1>{{title}}</h1>
     <h2>社員一覧</h2>
     <ul class="members">
-      <li *ngFor="let member of members"> 
+      <li *ngFor="let member of members" (click)="onSelect(member)"
+      [class.selected]="member === selectedMember"> 
         <span class="badge">{{member.id}}</span> {{member.name}}
       </li>
     </ul>
-    `,
-  //   <div><label>id:</label>{{member.id}}</div>
-  //   <div>
-  //     <label>name:</label>
-  //     <input type="text" [(ngModel)]="member.name" placeholder="名前">
-  //   </div>
-  // `,
+    <div *ngIf="selectedMember">
+    <h2>{{selectedMember.name}}</h2>
+      <div><label>id:</label>{{selectedMember.id}}</div>
+      <div>
+        <label>name:</label>
+        <input type="text" [(ngModel)]="selectedMember.name" placeholder="名前">
+      </div>
+    </div>
+  `,
   styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -90,4 +93,9 @@ const MEMBERS: Member[] = [
 export class AppComponent {
   title = '自社社員名簿';
   members = MEMBERS;
+  selectedMember: Member;
+
+  onSelect(member: Member): void {
+    this.selectedMember = member;
+  }
 }
