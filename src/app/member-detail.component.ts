@@ -16,7 +16,6 @@ import { Member } from './member';
 })
 
 export class MemberDetailComponent {
-    member: Member;
     @Input() member: Member;
 }
 
